@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+import random
 
 month_dict = {"jan": "The beginning of the year.", "feb": "Winter is almost gone.", 
                   "mar": "Spring is coming", "apr": "It becomes warmer."}
-
 def home(request):
+    return render(request, "monthly/home.html", {"title":"monthly", "months":list(month_dict.keys())})
+
+def no_html_home(request):
     months = list(month_dict.keys())
     # create a hyperlink for each month
     items = ''
@@ -14,7 +17,16 @@ def home(request):
         items += f"<li><a href=\"{item_path}\">{month.capitalize()}</a></li>"
     month_lists = f'<ul>{items}</ul>'
     return HttpResponse(month_lists)
-    #return render(request, "monthly/home.html")
+
+def static_response_home(request):
+    """random generates a number, showing content on the page."""
+    val = random.randrange(0,4)
+    months = list(month_dict.keys())
+    if val > len(month_dict):
+        text = "Not Found."
+    else:
+        text = month_dict[months[val]]
+    return render(request, "monthly/home.html", {"title":"Monthly Challenges", "text":text})
 
 # Create your views here.
 def index(request, month):
