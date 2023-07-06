@@ -1,15 +1,17 @@
+{% extends "blog/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'blog/styles/index.css' %}" />
-    <title>{{title}}</title>
-</head>
-<body class="blog_back">
-    <h1> {{title}} </h1>
-    <h3> My Latest Thoughts </h3>
-    
-</body>
-</html>
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog/styles/blog.css' %}" />
+{% endblock %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+    <ul>
+    {% for blog in blogs %}
+    <li> <a href="{{blog.title}}" > {{blog.title}} </a> {{blog.release_date}} </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
