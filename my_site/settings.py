@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-r6y(2ivmve4n19$ttb%5dwjvva!z%lr$^p%oq7e9)=bo&*$kc#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1'
-    #getenv("APP_HOST")
+ALLOWED_HOSTS = [#'localhost', '127.0.0.1'
+    getenv("APP_HOST")
 ]
 
 
